@@ -57,6 +57,15 @@ pages:
               - url: https://www.devonlive.com/news/?service=rss
                 title: Devon Live
 
+          - type: rss
+            title: Tech News
+            style: horizontal-cards
+            limit: 10
+            collapse-after: 6
+            feeds:
+              - url: https://techradar.com/rss
+                title: TechRadar
+
       - size: small
         widgets:
           - type: bookmarks
