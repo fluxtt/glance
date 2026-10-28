@@ -5,9 +5,9 @@ title Glance Config Deploy
 :: ---------------------------------------------------------------
 ::  Deploy glance.yml to the Glance host
 :: ---------------------------------------------------------------
-set "REMOTE_USER=root"
+set "REMOTE_USER=james"
 set "REMOTE_HOST=192.168.1.100"
-set "REMOTE_PATH=/opt/glance_data/glance.yml"
+set "REMOTE_PATH=/home/james/stacks/glance/config/glance.yml"
 set "LOCAL_FILE=%~dp0glance.yml"
 
 echo ===============================================

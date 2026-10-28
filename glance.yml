@@ -26,7 +26,7 @@ pages:
 
           - type: dns-stats
             service: adguard
-            url: http://192.168.1.99/
+            url: http://192.168.1.100/
             username: james
             password: ${ADGUARD_PASSWORD}
 
@@ -78,10 +78,6 @@ pages:
               - title: Homelab
                 color: 150 40 55
                 links:
-                  - title: Proxmox
-                    url: https://192.168.1.101:8006
-                    icon: si:proxmox
-
                   - title: UniFi Network
                     url: https://unifi.ui.com/consoles/6f3f01b4-352b-46c5-93dd-c53ad4ac2e14/network/default/dashboard
                     icon: si:ubiquiti
@@ -91,21 +87,5 @@ pages:
             cache: 2m
             sites:
               - title: AdGuard Home
-                url: http://192.168.1.99/#
+                url: http://192.168.1.100/
                 icon: si:adguard
-
-          # ENABLE ONCE PROXMOX API TOKEN IS SET UP:
-          # - type: custom-api
-          #   title: Proxmox host
-          #   cache: 30s
-          #   url: https://192.168.1.101:8006/api2/json/nodes/YOUR-NODE/status
-          #   allow-insecure: true
-          #   headers:
-          #     Authorization: "PVEAPIToken=user@pve!tokenid=YOUR-TOKEN-SECRET"
-          #   template: |
-          #     <div class="flex justify-between text-center">
-          #       <div>
-          #         <div class="color-highlight size-h3">{{ printf "%.0f" (mul (.JSON.Float "cpu") 100) }}%</div>
-          #         <div class="size-h6">CPU</div>
-          #       </div>
-          #     </div>

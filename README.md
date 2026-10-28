@@ -1,32 +1,48 @@
 # glance-config
 
-This repository contains a Glance dashboard configuration and a small deployment helper script.
+Configuration and deploy script for my homelab [Glance](https://github.com/glanceapp/glance) dashboard ("fluxt // control").
 
 ## Contents
 
-- `glance.yml` - Glance dashboard configuration file, defining theme, branding, pages, and widgets.
-- `remote_update.bat` - Windows helper script to copy `glance.yml` to a remote server using `scp`.
+- `glance.yml` - dashboard config: theme, branding, and a Home page with clock, weather,
+  AdGuard DNS stats, search, Devon news RSS feeds, bookmarks and a service monitor.
+- `remote_update.bat` - Windows helper that copies `glance.yml` to the server with `scp`.
 
-## Purpose
+## How it runs
 
-This repo is used to manage a Glance dashboard setup for a personal homelab and security/dev monitoring view.
-The configuration includes widgets for clock, weather, services, Docker containers, bookmarks, Hacker News, and security RSS feeds.
+Glance runs in Docker on an Ubuntu Server host, with the config directory bind-mounted
+into the container:
+
+```yaml
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./config:/app/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8082:8080
+```
+
+Secrets are not stored in this repo. The AdGuard password is read from an `ADGUARD_PASSWORD`
+variable in a `.env` file next to `docker-compose.yml` on the server (not committed).
 
 ## Usage
 
-### Local edits
+### Edit locally
 
-1. Edit `glance.yml` to update the dashboard layout, widgets, links, and data sources.
-2. Save your changes.
+1. Edit `glance.yml`.
+2. Save.
 
-### Deploy to remote Glance instance
+### Deploy
 
-Update `remote_update.bat` with the correct remote host, username, and destination path if needed.
+Run `remote_update.bat` from PowerShell or Command Prompt. It uploads `glance.yml` to
+`/home/james/stacks/glance/config/` on the server using `scp`. Glance reloads the config
+automatically, so no restart is needed. If an update contains an error, Glance keeps running
+the old config and logs the problem (`docker compose logs glance`).
 
-Run the script from PowerShell or Command Prompt:
-
-```bat
-remote_update.bat
-```
-
-This uses `scp` to copy the local `glance.yml` file to the configured remote destination.
+Set `REMOTE_USER`, `REMOTE_HOST` and `REMOTE_PATH` at the top of the script if they change.
+SSH key authentication is used so the script doesn't prompt for a password.
