@@ -79,7 +79,7 @@ pages:
                 color: 150 40 55
                 links:
                   - title: UniFi Network
-                    url: https://unifi.ui.com/consoles/6f3f01b4-352b-46c5-93dd-c53ad4ac2e14/network/default/dashboard
+                    url: https://unifi.ui.com/consoles/2526a384-d949-4952-94c6-8d14c4fc41fd/network/default/dashboard
                     icon: si:ubiquiti
 
           - type: monitor
