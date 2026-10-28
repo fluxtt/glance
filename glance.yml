@@ -13,16 +13,24 @@ pages:
     columns:
       - size: small
         widgets:
-          - type: clock
-            hour-format: 24h
-            timezones:
-              - timezone: UTC
-                label: UTC
-
           - type: weather
             location: Exeter, United Kingdom
             units: metric
             hour-format: 24h
+
+          - type: server-stats
+            servers:
+              - type: local
+                name: fluxlab
+                hide-swap: true
+                hide-mountpoints-by-default: true
+                mountpoints:
+                  "/mnt/ssd":
+                    name: SSD
+                    hide: false
+                  "/mnt/data":
+                    name: HDD
+                    hide: false
 
           - type: dns-stats
             service: adguard
