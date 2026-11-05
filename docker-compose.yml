@@ -1,0 +1,16 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./config:/app/config
+      - /etc/localtime:/etc/localtime:ro
+      - /srv/ssd-probe:/mnt/ssd:ro
+      - /mnt/data:/mnt/data:ro
+    ports:
+      - 8082:8080
+    environment:
+      UPTIME_KUMA_URL: http://192.168.1.100:3001
+      UPTIME_KUMA_STATUS_SLUG: fluxlab
