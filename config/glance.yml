@@ -13,6 +13,20 @@ pages:
     columns:
       - size: small
         widgets:
+          - type: server-stats
+            servers:
+              - type: local
+                name: fluxlab
+                hide-swap: true
+                hide-mountpoints-by-default: true
+                mountpoints:
+                  "/mnt/ssd":
+                    name: SSD
+                    hide: false
+                  "/mnt/data":
+                    name: HDD
+                    hide: false
+
           - type: custom-api
             title: Uptime Kuma
             title-url: ${UPTIME_KUMA_URL}
@@ -75,19 +89,10 @@ pages:
               </ul>
               {{ end }}
 
-          - type: server-stats
-            servers:
-              - type: local
-                name: fluxlab
-                hide-swap: true
-                hide-mountpoints-by-default: true
-                mountpoints:
-                  "/mnt/ssd":
-                    name: SSD
-                    hide: false
-                  "/mnt/data":
-                    name: HDD
-                    hide: false
+          - type: docker-containers
+            title: Services
+            hide-by-default: false
+            running-only: false
 
           - type: dns-stats
             service: adguard
@@ -101,6 +106,15 @@ pages:
             search-engine: duckduckgo
             new-tab: true
             autofocus: true
+
+          - type: rss
+            title: Weather Warnings
+            style: detailed-list
+            limit: 5
+            cache: 30m
+            feeds:
+              - url: https://weather.metoffice.gov.uk/public/data/PWSCache/WarningsRSS/Region/sw
+                title: Met Office SW England
 
           - type: rss
             title: Devon News
@@ -122,6 +136,10 @@ pages:
             feeds:
               - url: https://techradar.com/rss
                 title: TechRadar
+              - url: https://feeds.bbci.co.uk/news/technology/rss.xml
+                title: BBC Technology
+              - url: https://www.theregister.com/headlines.atom
+                title: The Register
 
       - size: small
         widgets:
@@ -155,11 +173,3 @@ pages:
                   - title: UniFi Network
                     url: https://unifi.ui.com/consoles/2526a384-d949-4952-94c6-8d14c4fc41fd/network/default/dashboard
                     icon: si:ubiquiti
-
-          - type: monitor
-            title: Services
-            cache: 2m
-            sites:
-              - title: AdGuard Home
-                url: http://192.168.1.100/
-                icon: si:adguard

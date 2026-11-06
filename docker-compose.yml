@@ -9,6 +9,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /srv/ssd-probe:/mnt/ssd:ro
       - /mnt/data:/mnt/data:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 8082:8080
     environment:
